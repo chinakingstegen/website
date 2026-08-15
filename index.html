@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China King | Ste. Genevieve, MO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lacquer: #A3271F;
+    --lacquer-dark: #7A1D17;
+    --ink: #211D19;
+    --rice: #F4ECD9;
+    --rice-dim: #EADFC6;
+    --gold: #C79A46;
+    --jade: #4B6B57;
+    --line: rgba(33,29,25,0.14);
+    --max: 1120px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--rice);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width: var(--max); margin: 0 auto; padding: 0 28px;}
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--jade);
+    outline-offset: 3px;
+  }
+
+  .topbar{
+    background: var(--ink);
+    color: var(--rice-dim);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+  }
+  .topbar .wrap{
+    display:flex; justify-content: space-between; align-items:center;
+    padding-top:9px; padding-bottom:9px;
+    flex-wrap: wrap; gap: 6px 24px;
+  }
+  .topbar a{ text-decoration:none; }
+  .topbar a:hover{ color: var(--gold); }
+  .topbar .status{ display:inline-flex; align-items:center; gap:7px; }
+  .dot{width:7px; height:7px; border-radius:50%; background:#7FBF8E; display:inline-block;}
+
+  header.site{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(244,236,217,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 28px;
+    max-width: var(--max); margin: 0 auto;
+  }
+  .brand{ display:flex; align-items:baseline; gap:10px; text-decoration:none; color:var(--ink); }
+  .brand .mark{ font-family:'Fraunces', serif; font-weight:700; font-size:1.5rem; color: var(--lacquer); }
+  .brand .sub{ font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; color: var(--jade); }
+  .navlinks{ display:flex; gap:32px; list-style:none; font-size:0.92rem; font-weight:500; }
+  .navlinks a{ text-decoration:none; position:relative; padding: 4px 0; }
+  .navlinks a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-3px; height:2px;
+    background: var(--lacquer); transform: scaleX(0); transform-origin:right;
+    transition: transform .25s ease;
+  }
+  .navlinks a:hover::after{ transform: scaleX(1); transform-origin:left; }
+  .nav-cta{
+    background: var(--lacquer); color: var(--rice);
+    padding: 10px 20px; border-radius: 2px;
+    font-weight:600; font-size:0.88rem; text-decoration:none;
+    letter-spacing:0.02em; transition: background .2s ease; white-space:nowrap;
+  }
+  .nav-cta:hover{ background: var(--lacquer-dark); }
+  .menutoggle{ display:none; }
+
+  .hero{
+    position:relative; padding: 96px 0 110px; overflow:hidden;
+    background:
+      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(163,39,31,0.10), transparent),
+      var(--rice);
+  }
+  .hero .wrap{ display:grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items:center; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:0.78rem; letter-spacing:0.18em; text-transform:uppercase;
+    color: var(--lacquer); font-weight:600; margin-bottom:22px;
+  }
+  .eyebrow::before{ content:''; width:26px; height:1px; background:var(--lacquer); }
+  .hero h1{ font-size: clamp(2.6rem, 5.2vw, 4.4rem); line-height: 0.98; color: var(--ink); }
+  .hero h1 em{ font-style: normal; color: var(--lacquer); }
+  .hero p.lede{ margin-top: 22px; font-size: 1.08rem; max-width: 46ch; color: rgba(33,29,25,0.78); }
+  .hero-ctas{ margin-top: 34px; display:flex; gap:16px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 14px 26px; border-radius:2px; font-weight:600; font-size:0.94rem;
+    text-decoration:none; border:1px solid transparent; transition: all .2s ease;
+  }
+  .btn-primary{ background: var(--lacquer); color: var(--rice); }
+  .btn-primary:hover{ background: var(--lacquer-dark); }
+  .btn-ghost{ border-color: var(--ink); color: var(--ink); }
+  .btn-ghost:hover{ background: var(--ink); color: var(--rice); }
+
+  .hero-panel{ background: var(--ink); color: var(--rice-dim); border-radius: 3px; padding: 34px 32px; position: relative; }
+  .hero-panel::before{
+    content:'招牌菜'; position:absolute; top:-14px; left:32px;
+    background: var(--gold); color: var(--ink); font-weight:700;
+    font-size:0.72rem; letter-spacing:0.08em; padding:5px 12px; border-radius:2px;
+  }
+  .hero-panel h3{ color: var(--rice); font-size:1.15rem; margin-bottom: 6px; margin-top:6px; }
+  .hero-panel p{ font-size:0.9rem; color: rgba(244,236,217,0.65); margin-top:6px; }
+  .hero-panel hr{ border:none; border-top:1px solid rgba(244,236,217,0.14); margin:20px 0; }
+  .hero-panel .hp-row{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .hero-panel .price{ font-family:'Fraunces',serif; font-weight:600; font-size:1.2rem; white-space:nowrap; }
+
+  section{ padding: 88px 0; }
+  .section-head{ margin-bottom: 48px; max-width: 620px; }
+  .section-head .eyebrow{ margin-bottom: 14px; }
+  .section-head h2{ font-size: clamp(1.9rem, 3.4vw, 2.6rem); }
+  .section-head p{ margin-top:14px; color: rgba(33,29,25,0.72); font-size:1.02rem; }
+
+  .about{ background: var(--rice-dim); }
+  .about .wrap{ display:grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items:center; }
+  .about-figure{
+    background: linear-gradient(160deg, var(--jade), #35473c);
+    border-radius: 3px; min-height: 360px; position:relative; overflow:hidden;
+    display:flex; align-items:flex-end; padding: 26px;
+  }
+  .about-figure .tag{ color: var(--rice); font-family:'Fraunces',serif; font-size:1.2rem; }
+  .about-figure .tag small{ display:block; font-family:'Inter',sans-serif; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color: rgba(244,236,217,0.7); margin-top:6px; }
+  .stats{ display:flex; gap: 34px; margin-top: 30px; flex-wrap:wrap; }
+  .stat b{ display:block; font-family:'Fraunces',serif; font-size:1.9rem; color: var(--lacquer); }
+  .stat span{ font-size:0.82rem; color: rgba(33,29,25,0.65); }
+
+  .menu-tabs{ display:flex; gap:10px; margin-bottom: 40px; flex-wrap:wrap; }
+  .menu-tab{
+    background:transparent; border:1px solid var(--line); color: var(--ink);
+    padding: 10px 18px; border-radius: 999px; font-family:'Inter',sans-serif;
+    font-size:0.85rem; font-weight:600; cursor:pointer; transition: all .2s ease;
+  }
+  .menu-tab.active, .menu-tab:hover{ background: var(--ink); color: var(--rice); border-color: var(--ink); }
+  .menu-grid{
+    display:grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line);
+  }
+  .menu-item{ background: var(--rice); padding: 20px 24px; }
+  .menu-item .row{ display:flex; justify-content:space-between; gap: 16px; align-items:baseline; }
+  .menu-item h4{ font-family:'Fraunces',serif; font-weight:600; font-size:1.04rem; }
+  .menu-item .qty{ color: rgba(33,29,25,0.45); font-family:'Inter',sans-serif; font-weight:500; font-size:0.78rem; white-space:nowrap; }
+  .menu-item .price{ color: var(--lacquer); font-family:'Fraunces',serif; font-weight:600; font-size:0.98rem; white-space:nowrap; text-align:right; }
+  .menu-item .price .size{ display:block; font-family:'Inter',sans-serif; font-weight:500; font-size:0.66rem; letter-spacing:0.06em; text-transform:uppercase; color: rgba(33,29,25,0.45); }
+  .menu-item .price .flat{ font-size:0.98rem; }
+  .menu-item p.desc{ margin-top:6px; font-size:0.86rem; color: rgba(33,29,25,0.6); }
+  .menu-note{ margin-top: 26px; font-size: 0.85rem; color: rgba(33,29,25,0.55); }
+  .lunch-banner{
+    background: var(--ink); color: var(--rice);
+    border-radius:3px; padding: 22px 26px; margin-bottom: 26px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+  }
+  .lunch-banner .lb-price{ font-family:'Fraunces',serif; font-size:1.7rem; color: var(--gold); }
+  .lunch-banner .lb-text b{ display:block; font-family:'Fraunces',serif; font-size:1.05rem; color: var(--rice); margin-bottom:4px; }
+  .lunch-banner .lb-text span{ font-size:0.85rem; color: rgba(244,236,217,0.7); }
+
+  .strip{ background: var(--ink); color: var(--rice); padding: 60px 0; }
+  .strip .wrap{ display:grid; grid-template-columns: repeat(3,1fr); gap: 40px; }
+  .strip h3{ color: var(--gold); font-size:1.1rem; margin-bottom:8px; }
+  .strip p{ color: rgba(244,236,217,0.66); font-size:0.92rem; }
+
+  .visit .wrap{ display:grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+  .card{ background: var(--rice-dim); border-radius:3px; padding: 32px; }
+  .card h3{ font-size:1.15rem; margin-bottom: 18px; }
+  .hours-row{ display:flex; justify-content:space-between; padding: 9px 0; border-bottom: 1px solid var(--line); font-size:0.92rem; }
+  .hours-row:last-child{ border-bottom:none; }
+  .hours-row span:first-child{ color: rgba(33,29,25,0.7); }
+  .hours-row.today{ font-weight:700; color: var(--lacquer); }
+
+  .info-list{ list-style:none; margin-top:6px; }
+  .info-list li{ padding: 14px 0; border-bottom:1px solid var(--line); display:flex; gap: 14px; font-size:0.94rem; }
+  .info-list li:last-child{ border-bottom:none; }
+  .info-list b{ font-family:'Fraunces',serif; font-weight:600; min-width: 90px; display:inline-block; }
+
+  .map-embed{ margin-top: 22px; border-radius:3px; overflow:hidden; border:1px solid var(--line); }
+  .map-embed iframe{ width:100%; height: 260px; border:0; display:block; }
+
+  .cta-band{ background: var(--lacquer); color: var(--rice); text-align:center; padding: 70px 0; }
+  .cta-band h2{ font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
+  .cta-band p{ margin-top:12px; color: rgba(244,236,217,0.85); }
+  .cta-band .hero-ctas{ justify-content:center; margin-top: 30px; }
+  .cta-band .btn-ghost{ border-color: var(--rice); color: var(--rice); }
+  .cta-band .btn-ghost:hover{ background: var(--rice); color: var(--lacquer); }
+  .cta-band .btn-primary{ background: var(--ink); }
+  .cta-band .btn-primary:hover{ background:#000; }
+
+  footer{ background: var(--ink); color: rgba(244,236,217,0.6); padding: 44px 0 30px; font-size: 0.86rem; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 16px; }
+  footer .brand .mark{ color: var(--gold); }
+  footer .brand .sub{ color: rgba(244,236,217,0.5); }
+  .foot-links{ display:flex; gap: 24px; list-style:none; }
+  .foot-links a{ text-decoration:none; }
+  .foot-links a:hover{ color: var(--gold); }
+
+  @media (max-width: 860px){
+    .navlinks{
+      position: fixed; inset: 64px 0 0 0; background: var(--rice);
+      flex-direction: column; padding: 30px 28px; gap: 22px;
+      transform: translateY(-110%); transition: transform .3s ease;
+      font-size: 1.1rem; z-index:40;
+    }
+    .navlinks.open{ transform: translateY(0); }
+    .menutoggle{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; }
+    .menutoggle span{ width:22px; height:2px; background: var(--ink); display:block; }
+    .hero .wrap, .about .wrap, .visit .wrap{ grid-template-columns: 1fr; }
+    .strip .wrap{ grid-template-columns: 1fr; gap: 30px; }
+    .menu-grid{ grid-template-columns: 1fr; }
+    .topbar .wrap{ font-size:0.76rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="status"><span class="dot"></span> Open now &middot; Closes 9:00 PM</span>
+    <a href="tel:5738838868">(573) 883-8868 &nbsp;|&nbsp; 110 Plaza Drive, Ste. Genevieve, MO</a>
+  </div>
+</div>
+
+<header class="site">
+  <nav>
+    <a href="#top" class="brand">
+      <span class="mark">China King</span>
+      <span class="sub">Ste. Genevieve</span>
+    </a>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#visit">Hours &amp; Location</a></li>
+      <li><a href="#order">Order</a></li>
+    </ul>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <a href="#order" class="nav-cta">Order Takeout</a>
+      <button class="menutoggle" id="menutoggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Family Owned &middot; Ste. Genevieve, MO</span>
+        <h1>Wok-fired favorites, <em>made your way.</em></h1>
+        <p class="lede">China King has been serving hand-cut, made-to-order Chinese-American cooking in Ste. Genevieve for years — generous portions, honest prices, and a kitchen that remembers how you like your spice level.</p>
+        <div class="hero-ctas">
+          <a href="#order" class="btn btn-primary">Order Takeout</a>
+          <a href="#menu" class="btn btn-ghost">View Menu</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="hp-row"><h3>Pu Pu Platter</h3><span class="price" style="color:var(--gold);">$9.25</span></div>
+        <p>Crab rangoon, crab stick, wings, egg roll, and fried baby shrimp — a table-sized sampler of the appetizer menu.</p>
+        <hr>
+        <div class="hp-row"><h3>Luncheon Special</h3><span class="price" style="color:var(--gold);">$8.65</span></div>
+        <p>Weekdays, 11 AM–3 PM. Served with fried or white rice, plus a free egg roll or crab rangoon.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap">
+      <div class="about-figure">
+        <div class="tag">A Ste. Genevieve favorite
+          <small>Cooking for the community for years</small>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">Our Story</span>
+        <h2>A neighborhood kitchen, run by the same family since day one.</h2>
+        <p style="margin-top:16px; color: rgba(33,29,25,0.75);">China King has stayed close to its roots — fresh vegetables cut every morning, sauces made in-house, and a menu shaped by years of regulars asking for "the usual." Dine in, carry out, or call ahead; either way, it comes out of the same wok.</p>
+        <div class="stats">
+          <div class="stat"><b>80+</b><span>Dishes on the menu</span></div>
+          <div class="stat"><b>4.5★</b><span>Average customer rating</span></div>
+          <div class="stat"><b>7</b><span>Days a week</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The Menu</span>
+        <h2>Everything on the wok</h2>
+        <p>Browse by category. Ask your server about spice level or substitutions on any dish.</p>
+      </div>
+
+      <div class="menu-tabs" id="menuTabs" role="tablist" aria-label="Menu categories"></div>
+      <div class="menu-grid" id="menuGrid"></div>
+
+      <p class="menu-note">Prices available in-restaurant and by phone. The degree of spice can be adjusted according to your preference.</p>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <div>
+        <h3>Dine In</h3>
+        <p>Comfortable seating for groups and families, with daily lunch specials.</p>
+      </div>
+      <div>
+        <h3>Carry Out</h3>
+        <p>Call ahead and your order will be ready at the counter — usually within 15–20 minutes.</p>
+      </div>
+      <div>
+        <h3>Catering</h3>
+        <p>Feeding a crowd? Ask about party trays for office lunches and family gatherings.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <div class="card">
+        <h3>Hours</h3>
+        <div class="hours-row"><span>Monday</span><span>11:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span>Tuesday</span><span>11:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span>Wednesday</span><span>11:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span>Thursday</span><span>11:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span>Friday</span><span>11:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span>Saturday</span><span>11:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span>Sunday</span><span>11:00 AM – 9:00 PM</span></div>
+        <p style="margin-top:14px; font-size:0.82rem; color: rgba(33,29,25,0.55);">Open 7 days a week, 11:00 AM – 9:00 PM.</p>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:0;">
+          <h3>Find Us</h3>
+          <ul class="info-list">
+            <li><b>Address</b><span>110 Plaza Drive, Ste. Genevieve, MO 63670</span></li>
+            <li><b>Phone</b><span><a href="tel:5738838868">(573) 883-8868</a></span></li>
+          </ul>
+          <div class="map-embed">
+            <iframe
+              src="https://www.google.com/maps?q=110+Plaza+Drive,+Ste.+Genevieve,+MO+63670&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Map showing China King location in Ste. Genevieve, MO">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band" id="order">
+    <div class="wrap">
+      <h2>Hungry? Let's get your order started.</h2>
+      <p>Call it in, or stop by Plaza Drive — we'll have it hot and ready.</p>
+      <div class="hero-ctas">
+        <a href="tel:5738838868" class="btn btn-primary">Call (573) 883-8868</a>
+        <a href="#menu" class="btn btn-ghost">Browse Full Menu</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <span class="mark">China King</span>
+      <span class="sub">Ste. Genevieve, MO</span>
+    </a>
+    <ul class="foot-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#visit">Hours</a></li>
+      <li><a href="tel:5738838868">(573) 883-8868</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.getElementById('menutoggle');
+  const navlinks = document.getElementById('navlinks');
+  toggle.addEventListener('click', () => {
+    const isOpen = navlinks.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navlinks.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+  }));
+
+  // ---------- Menu data ----------
+  // pt/qt = pint / quart sizing (small / large). p = single flat price. f = flat price for the whole lunch special line.
+  const MENU = {
+    "Lunch Special": {
+      note: { price: "$8.65", text: "Served with fried rice or white rice. Available 6 days a week, 11:00 AM \u2013 3:00 PM. Free choice of egg roll or crab rangoon with every order." },
+      items: [
+        { n: "Beef Or Chicken With Broccoli" },
+        { n: "Sesame Chicken" },
+        { n: "Kung Pao Chicken" },
+        { n: "Moo Goo Gai Pan" },
+        { n: "Pepper Steak Or Chicken" },
+        { n: "Pork W. Garlic Sauce" },
+        { n: "Roast Pork Or Chicken Or Beef Lo Mein" },
+        { n: "Roast Pork W. Broccoli" },
+        { n: "Shrimp Chow Mein" },
+        { n: "Shrimp W. Lobster Sauce" },
+        { n: "Chicken Or Shrimp W. Garlic Sauce" },
+        { n: "General Tso's Chicken" },
+        { n: "Hunan Beef Or Chicken W. Black Bean Sauce" },
+        { n: "Hunan Pork Or Shrimp W. Black Bean Sauce" },
+        { n: "Sauteed Mixed Vegetables" },
+        { n: "Sweet & Sour Chicken Or Pork" },
+        { n: "Roast Pork W. Chinese Vegetable" },
+        { n: "Beef Or Chicken W. Chinese Vegetable" },
+        { n: "Diced Chicken Or Shrimp With Cashew Nuts" },
+        { n: "Roast Pork Or Chicken Chow Mein" },
+        { n: "Roast Pork Or Chicken Chop Suey" },
+        { n: "Roast Pork Egg Foo Young" },
+        { n: "Szechuan Chicken Or Beef" },
+        { n: "Sa Cha Chicken Or Beef" },
+        { n: "Curry Chicken Or Shrimp" },
+        { n: "Fried Rice Or White Rice" },
+        { n: "Choice Of Soup Or Side", d: "Free choice of wonton, egg drop, or hot & sour soup, or egg roll, or crab rangoon" }
+      ]
+    },
+    "Appetizers": { items: [
+      { n: "Crab Stick", q: "4 pcs", p: "5.50" },
+      { n: "Fried Wonton", q: "10 pcs", p: "6.45" },
+      { n: "Roast Pork Egg Roll", p: "1.70" },
+      { n: "Steamed Or Fried Dumpling", q: "8 pcs", p: "6.45" },
+      { n: "Crab Rangoons", q: "8 pcs", p: "7.55" },
+      { n: "Fried Baby Shrimp", q: "15 pcs", p: "10.45" },
+      { n: "Fried Chicken Wings", q: "8 pcs", p: "7.35" },
+      { n: "Pu Pu Platter", d: "Crab rangoon, crab stick, wings, egg roll, fried baby shrimp", p: "9.25" },
+      { n: "Golden Donut", q: "10 pcs", p: "6.05" }
+    ]},
+    "Soup": { items: [
+      { n: "Chicken Rice / Noodle Soup", pt: "4.15", qt: "5.35" },
+      { n: "Egg Drop Soup", pt: "4.15", qt: "5.35" },
+      { n: "Hot & Sour Soup", pt: "4.65", qt: "6.10" },
+      { n: "House Special Soup", p: "8.15" },
+      { n: "Roast Pork Wonton Soup", pt: "4.40", qt: "5.35" },
+      { n: "Bean Curd W. Vegetable Soup", pt: "4.15", qt: "5.35" }
+    ]},
+    "Chow Mein": { items: [
+      { n: "Beef Chow Mein", pt: "9.85", qt: "12.15" },
+      { n: "Chicken Chow Mein", pt: "8.95", qt: "11.05" },
+      { n: "Roast Pork Chow Mein", pt: "8.95", qt: "11.05" },
+      { n: "Shrimp Chow Mein", pt: "9.85", qt: "12.15" },
+      { n: "House Special Chow Mein", pt: "9.85", qt: "12.15" },
+      { n: "Vegetable Chow Mein", pt: "8.05", qt: "9.55" }
+    ]},
+    "Chop Suey": { items: [
+      { n: "Beef Chop Suey", pt: "9.85", qt: "12.15" },
+      { n: "Chicken Chop Suey", pt: "8.95", qt: "11.05" },
+      { n: "Roast Pork Chop Suey", pt: "8.95", qt: "11.05" },
+      { n: "Shrimp Chop Suey", pt: "9.85", qt: "12.15" },
+      { n: "Vegetable Chop Suey", pt: "8.05", qt: "9.55" },
+      { n: "House Special Chop Suey", pt: "9.85", qt: "12.15" }
+    ]},
+    "Fried Rice": { items: [
+      { n: "Beef Fried Rice", pt: "7.95", qt: "10.15" },
+      { n: "Chicken Fried Rice", pt: "7.35", qt: "8.95" },
+      { n: "Roast Pork Fried Rice", pt: "7.35", qt: "8.95" },
+      { n: "Shrimp Fried Rice", pt: "7.95", qt: "10.15" },
+      { n: "House Special Fried Rice", pt: "8.35", qt: "10.65" },
+      { n: "Vegetable Fried Rice", pt: "6.90", qt: "8.35" },
+      { n: "Plain Fried Rice", pt: "5.85", qt: "6.75" }
+    ]},
+    "Lo Mein": { items: [
+      { n: "Beef Lo Mein", pt: "8.85", qt: "10.95" },
+      { n: "Chicken Lo Mein", pt: "8.35", qt: "10.15" },
+      { n: "Roast Pork Lo Mein", pt: "8.35", qt: "10.15" },
+      { n: "Shrimp Lo Mein", pt: "8.85", qt: "10.95" },
+      { n: "House Special Lo Mein", pt: "8.85", qt: "11.35" },
+      { n: "Vegetable Lo Mein", pt: "7.85", qt: "9.45" }
+    ]},
+    "Chicken": { items: [
+      { n: "Chicken W. Green Pepper", pt: "8.95", qt: "11.05" },
+      { n: "Moo Goo Gai Pan", pt: "8.95", qt: "11.05" },
+      { n: "Chicken W. Broccoli", pt: "8.95", qt: "11.05" },
+      { n: "Chicken W. Snow Peas Pods", pt: "8.95", qt: "11.05" },
+      { n: "Chicken W. Chinese Vegetable", pt: "8.95", qt: "11.05" },
+      { n: "Chicken W. Mixed Vegetable", pt: "8.95", qt: "11.05" },
+      { n: "Chicken W. Cashew Nuts", pt: "8.95", qt: "11.05" },
+      { n: "Sa Cha Chicken", p: "11.05" },
+      { n: "Kung Pao Chicken", p: "11.05" },
+      { n: "Szechuan Chicken", p: "11.05" },
+      { n: "Mongolian Chicken", p: "11.05" },
+      { n: "Hunan Chicken W. Black Bean Sauce", p: "11.05" },
+      { n: "Chicken W. Garlic Sauce", p: "11.05" }
+    ]},
+    "Pork": { items: [
+      { n: "Pork W. Green Pepper", pt: "8.95", qt: "11.05" },
+      { n: "Roast Pork W. Broccoli", pt: "8.95", qt: "11.05" },
+      { n: "Roast Pork W. Chinese Vegetable", pt: "8.95", qt: "11.05" },
+      { n: "Roast Pork W. Mushroom", pt: "8.95", qt: "11.05" },
+      { n: "Roast Pork W. Snow Peas", pt: "8.95", qt: "11.05" },
+      { n: "Mongolian Pork", p: "11.05" },
+      { n: "Hunan Sliced Pork W. Black Bean Sauce", p: "11.05" },
+      { n: "Sa Cha Pork", p: "11.05" },
+      { n: "Pork W. Garlic Sauce", p: "11.05" }
+    ]},
+    "Beef": { items: [
+      { n: "Beef W. Chinese Vegetable", pt: "9.85", qt: "12.15" },
+      { n: "Beef W. Fresh Broccoli", pt: "9.85", qt: "12.15" },
+      { n: "Beef W. Mushroom", pt: "9.85", qt: "12.15" },
+      { n: "Beef W. Oyster Sauce", pt: "9.85", qt: "12.15" },
+      { n: "Beef W. Snow Pea Pods", pt: "9.85", qt: "12.15" },
+      { n: "Green Pepper Steak", pt: "9.85", qt: "12.15" },
+      { n: "Beef W. Vegetable", pt: "9.85", qt: "12.15" },
+      { n: "Hunan Beef W. Black Bean Sauce", p: "12.15" },
+      { n: "Mongolian Beef", p: "12.15" },
+      { n: "Szechuan Beef", p: "12.15" },
+      { n: "Beef W. Garlic Sauce", p: "12.15" },
+      { n: "Sa Cha Beef", p: "12.15" }
+    ]},
+    "Seafood": { items: [
+      { n: "Shrimp W. Chinese Vegetable", pt: "9.85", qt: "12.15" },
+      { n: "Shrimp W. Fresh Broccoli", pt: "9.85", qt: "12.15" },
+      { n: "Shrimp W. Green Pepper", pt: "9.85", qt: "12.15" },
+      { n: "Shrimp W. Lobster Sauce", pt: "9.85", qt: "12.15" },
+      { n: "Shrimp W. Snow Pea Pods", pt: "9.85", qt: "12.15" },
+      { n: "Shrimp W. Mixed Vegetable", pt: "9.85", qt: "12.15" },
+      { n: "Shrimp W. Cashew Nuts", pt: "9.85", qt: "12.15" },
+      { n: "Szechuan Shrimp", p: "12.15" },
+      { n: "Kung Pao Baby Shrimp", p: "12.15" },
+      { n: "Hunan Shrimp W. Black Bean Sauce", p: "12.15" },
+      { n: "Scallops W. Garlic Sauce", p: "12.15" },
+      { n: "Sa Cha Shrimp", p: "12.15" },
+      { n: "Shrimp W. Garlic Sauce", p: "12.15" }
+    ]},
+    "Others": { items: [
+      { n: "Shrimp W. Broccoli", pt: "9.85", qt: "12.15" },
+      { n: "Singapore Mei Fun", d: "Ask your server for current pricing" },
+      { n: "Steamed Or Fried Dumpling", q: "8 pcs", p: "6.45" },
+      { n: "Hot & Spicy Beef", d: "Hot & spicy", p: "12.15" },
+      { n: "Happy Family", p: "14.15" },
+      { n: "Hunan Beef", p: "12.15" }
+    ]}
+  };
+
+  const tabsEl = document.getElementById('menuTabs');
+  const gridEl = document.getElementById('menuGrid');
+  const categories = Object.keys(MENU);
+
+  function priceHTML(item) {
+    if (item.pt && item.qt) {
+      return `<span class="price">$${item.pt}<span class="size">Pt.</span></span><span class="price">$${item.qt}<span class="size">Qt.</span></span>`;
+    }
+    if (item.p) {
+      return `<span class="price flat">$${item.p}</span>`;
+    }
+    return '';
+  }
+
+  function renderCategory(cat) {
+    const data = MENU[cat];
+    let html = '';
+    if (data.note) {
+      html += `
+        <div class="lunch-banner">
+          <div class="lb-text"><b>Luncheon Special</b><span>${data.note.text}</span></div>
+          <div class="lb-price">${data.note.price}</div>
+        </div>
+      `;
+    }
+    gridEl.innerHTML = html + data.items.map(item => `
+      <div class="menu-item">
+        <div class="row">
+          <h4>${item.n}${item.q ? ` <span class="qty">(${item.q})</span>` : ''}</h4>
+          <span style="display:flex; gap:14px;">${priceHTML(item)}</span>
+        </div>
+        ${item.d ? `<p class="desc">${item.d}</p>` : ''}
+      </div>
+    `).join('');
+  }
+
+  categories.forEach((cat, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'menu-tab' + (i === 0 ? ' active' : '');
+    btn.textContent = cat;
+    btn.addEventListener('click', () => {
+      tabsEl.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      renderCategory(cat);
+    });
+    tabsEl.appendChild(btn);
+  });
+
+  renderCategory(categories[0]);
+</script>
+
+</body>
+</html>
