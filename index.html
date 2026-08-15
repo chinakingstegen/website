@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>China King Ste. Genevieve | Authentic Chinese Restaurant &amp; Takeout, MO</title>
-<meta name="description" content="China King in Ste. Genevieve, MO — family-owned Chinese restaurant serving favorites, combination platters, and daily lunch specials from $8.65. Dine in, carry out, or call (573) 883-8868.">
+<meta name="description" content="China King in Ste. Genevieve, MO — family-owned Chinese restaurant serving hand-cooked favorites, combination platters, and daily lunch specials from $8.65. Dine in, carry out, or call (573) 883-8868.">
 <meta name="theme-color" content="#A3271F">
 <link rel="canonical" href="https://chinakingstegen.github.io/website/">
 <meta property="og:url" content="https://chinakingstegen.github.io/website/">
@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="China King | Authentic Chinese Restaurant in Ste. Genevieve, MO">
-<meta property="og:description" content="Authentic Chinese cuisine, made fresh daily. Dine in, carry out, or call ahead. 110 Plaza Drive, Ste. Genevieve, MO.">
+<meta property="og:description" content="Hand-cooked Chinese-American favorites, made fresh daily. Dine in, carry out, or call ahead. 110 Plaza Drive, Ste. Genevieve, MO.">
 <meta property="og:locale" content="en_US">
 <script type="application/ld+json">
 {
@@ -276,13 +276,14 @@
 
   @media (max-width: 860px){
     .navlinks{
-      position: fixed; inset: 64px 0 0 0; background: var(--rice);
+      position: fixed; top: var(--header-h, 96px); left:0; right:0; bottom:0;
+      background: var(--rice);
       flex-direction: column; padding: 30px 28px; gap: 22px;
       transform: translateY(-110%); transition: transform .3s ease;
-      font-size: 1.1rem; z-index:40;
+      font-size: 1.1rem; z-index:40; overflow-y:auto;
     }
     .navlinks.open{ transform: translateY(0); }
-    .menutoggle{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px; flex-shrink:0; }
+    .menutoggle{ display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; background:none; border:none; cursor:pointer; padding:10px; flex-shrink:0; width:44px; height:44px; }
     .menutoggle span{ width:22px; height:2px; background: var(--ink); display:block; }
     .hero .wrap, .about .wrap, .visit .wrap{ grid-template-columns: 1fr; }
     .strip .wrap{ grid-template-columns: 1fr; gap: 30px; }
@@ -349,7 +350,7 @@
     <div class="wrap">
       <div>
         <span class="eyebrow">Family Owned &middot; Ste. Genevieve, MO</span>
-        <h1>favorites, <em>made your way.</em></h1>
+        <h1>Fresh-cooked favorites, <em>made your way.</em></h1>
         <p class="lede">China King has been serving hand-cut, made-to-order Chinese-American cooking in Ste. Genevieve for years — generous portions, honest prices, and a kitchen that remembers how you like your spice level.</p>
         <div class="hero-ctas">
           <a href="#order" class="btn btn-primary">Order Takeout</a>
@@ -376,7 +377,7 @@
       <div>
         <span class="eyebrow">Our Story</span>
         <h2>A neighborhood kitchen, run by the same family since day one.</h2>
-        <p style="margin-top:16px; color: rgba(33,29,25,0.75);">China King has stayed close to its roots — fresh vegetables cut every morning, sauces made in-house, and a menu shaped by years of regulars asking for "the usual." Dine in, carry out, or call ahead.</p>
+        <p style="margin-top:16px; color: rgba(33,29,25,0.75);">China King has stayed close to its roots — fresh vegetables cut every morning, sauces made in-house, and a menu shaped by years of regulars asking for "the usual." Dine in, carry out, or call ahead; either way, it's made fresh to order, every time.</p>
         <div class="stats">
           <div class="stat"><b>80+</b><span>Dishes on the menu</span></div>
           <div class="stat"><b>4.5★</b><span>Average customer rating</span></div>
@@ -413,7 +414,7 @@
       </div>
       <div>
         <h3>Catering</h3>
-        <p>Feeding a crowd? Order ahead and we'll have it ready for your event.</p>
+        <p>Feeding a crowd? Ask about party trays for office lunches and family gatherings.</p>
       </div>
     </div>
   </div>
@@ -482,13 +483,31 @@
   // Mobile nav toggle
   const toggle = document.getElementById('menutoggle');
   const navlinks = document.getElementById('navlinks');
+  const siteHeader = document.querySelector('header.site');
+
+  function setHeaderHeightVar() {
+    if (!siteHeader) return;
+    const bottom = siteHeader.getBoundingClientRect().bottom;
+    document.documentElement.style.setProperty('--header-h', Math.max(bottom, 0) + 'px');
+  }
+  setHeaderHeightVar();
+  window.addEventListener('resize', setHeaderHeightVar);
+  window.addEventListener('orientationchange', setHeaderHeightVar);
+  window.addEventListener('scroll', setHeaderHeightVar, { passive: true });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(setHeaderHeightVar);
+  }
+
   toggle.addEventListener('click', () => {
+    setHeaderHeightVar();
     const isOpen = navlinks.classList.toggle('open');
     toggle.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
   navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     navlinks.classList.remove('open');
     toggle.setAttribute('aria-expanded', false);
+    document.body.style.overflow = '';
   }));
 
   // ---------- Menu data ----------
@@ -498,7 +517,7 @@
       { num: "48", n: "General Tso's Chicken", d: "Crispy fried chicken tossed in a sweet, tangy house chili sauce.", cat: "Chicken", p: "11.05" },
       { num: "S9", n: "Sesame Chicken", d: "Crispy fried chicken glazed in a sweet sesame sauce, toasted sesame seed.", cat: "Chicken", p: "11.05" },
       { num: "5", n: "Crab Rangoons", q: "8 pcs", d: "Wonton pastries filled with sweet cream cheese and crab, fried golden.", p: "7.55" },
-      { num: "63", n: "Beef W. Fresh Broccoli", d: "Sliced beef and fresh broccoli, wok-tossed in a savory brown sauce.", pt: "9.85", qt: "12.15" },
+      { num: "63", n: "Beef W. Fresh Broccoli", d: "Sliced beef and fresh broccoli, stir-tossed in a savory brown sauce.", pt: "9.85", qt: "12.15" },
       { num: "48", n: "Kung Pao Chicken", d: "Diced chicken, peanuts, and dried chili stir-fried in a spicy-tangy sauce.", p: "11.05", spicy: true },
       { num: "70", n: "Mongolian Beef", d: "Seared beef and scallion in a sweet soy-garlic glaze.", p: "12.15" },
       { num: "77", n: "Shrimp W. Lobster Sauce", d: "Shrimp simmered in a light garlic-egg white sauce, despite the name — no lobster.", pt: "9.85", qt: "12.15" },
@@ -517,22 +536,22 @@
         { num: "L8", n: "Roast Pork W. Broccoli", d: "Roast pork and fresh broccoli in brown sauce." },
         { num: "L9", n: "Shrimp Chow Mein", d: "Crispy pan-fried noodles topped with shrimp and vegetables." },
         { num: "L10", n: "Shrimp W. Lobster Sauce", d: "Shrimp in a light garlic-egg white sauce." },
-        { num: "L11", n: "Chicken Or Shrimp W. Garlic Sauce", d: "Wok-seared in a bold garlic sauce.", spicy: true },
+        { num: "L11", n: "Chicken Or Shrimp W. Garlic Sauce", d: "Seared in a bold garlic sauce.", spicy: true },
         { num: "L12", n: "General Tso's Chicken", d: "Crispy chicken tossed in sweet, tangy chili sauce." },
         { num: "L13", n: "Hunan Beef Or Chicken W. Black Bean Sauce", d: "Stir-fried in a savory fermented black bean sauce.", spicy: true },
         { num: "L14", n: "Hunan Pork Or Shrimp W. Black Bean Sauce", d: "Stir-fried in a savory fermented black bean sauce.", spicy: true },
-        { num: "L15", n: "Sauteed Mixed Vegetables", d: "Seasonal vegetables wok-tossed in a light garlic sauce." },
+        { num: "L15", n: "Sauteed Mixed Vegetables", d: "Seasonal vegetables stir-tossed in a light garlic sauce." },
         { num: "L16", n: "Sweet & Sour Chicken Or Pork", d: "Battered and fried, tossed with pineapple and bell pepper in sweet-and-sour sauce." },
         { num: "L17", n: "Roast Pork W. Chinese Vegetable", d: "Roast pork with bok choy and Chinese greens." },
-        { num: "L18", n: "Beef Or Chicken W. Chinese Vegetable", d: "Wok-tossed with bok choy and Chinese greens." },
+        { num: "L18", n: "Beef Or Chicken W. Chinese Vegetable", d: "Stir-tossed with bok choy and Chinese greens." },
         { num: "L19", n: "Diced Chicken Or Shrimp With Cashew Nuts", d: "Stir-fried with roasted cashews and vegetables." },
         { num: "L20", n: "Roast Pork Or Chicken Chow Mein", d: "Crispy pan-fried noodles topped with your choice of protein." },
         { num: "L21", n: "Roast Pork Or Chicken Chop Suey", d: "Stir-fried with celery, bean sprouts, and mixed vegetables." },
         { num: "L22", n: "Roast Pork Egg Foo Young", d: "Savory egg patties with roast pork and bean sprouts, topped with gravy." },
         { num: "L23", n: "Szechuan Chicken Or Beef", d: "Stir-fried in a spicy Szechuan chili sauce.", spicy: true },
-        { num: "L24", n: "Sa Cha Chicken Or Beef", d: "Wok-seared in a savory Sa Cha (BBQ) sauce.", spicy: true },
+        { num: "L24", n: "Sa Cha Chicken Or Beef", d: "Seared in a savory Sa Cha (BBQ) sauce.", spicy: true },
         { num: "L25", n: "Curry Chicken Or Shrimp", d: "Simmered in a mild yellow curry sauce with onion and potato." },
-        { num: "L26", n: "Fried Rice Or White Rice", d: "Your choice of steamed white rice or wok-fried rice." },
+        { num: "L26", n: "Fried Rice Or White Rice", d: "Your choice of steamed white rice or stir-fried rice." },
         { num: "L27", n: "Choice Of Soup Or Side", d: "Free choice of wonton, egg drop, or hot & sour soup, or egg roll, or crab rangoon" }
       ]
     },
@@ -572,13 +591,13 @@
       { num: "27", n: "House Special Chop Suey", d: "Shrimp, chicken, and roast pork stir-fried with celery and bean sprouts.", pt: "9.85", qt: "12.15" }
     ]},
     "Fried Rice": { items: [
-      { num: "28", n: "Beef Fried Rice", d: "Wok-fried rice with beef, egg, and scallion.", pt: "7.95", qt: "10.15" },
-      { num: "29", n: "Chicken Fried Rice", d: "Wok-fried rice with chicken, egg, and scallion.", pt: "7.35", qt: "8.95" },
-      { num: "30", n: "Roast Pork Fried Rice", d: "Wok-fried rice with roast pork, egg, and scallion.", pt: "7.35", qt: "8.95" },
-      { num: "31", n: "Shrimp Fried Rice", d: "Wok-fried rice with shrimp, egg, and scallion.", pt: "7.95", qt: "10.15" },
-      { num: "32", n: "House Special Fried Rice", d: "Wok-fried rice with shrimp, chicken, and roast pork.", pt: "8.35", qt: "10.65" },
-      { num: "33", n: "Vegetable Fried Rice", d: "Wok-fried rice with mixed garden vegetables and egg.", pt: "6.90", qt: "8.35" },
-      { num: "34", n: "Plain Fried Rice", d: "Wok-fried rice with egg and scallion.", pt: "5.85", qt: "6.75" }
+      { num: "28", n: "Beef Fried Rice", d: "Stir-fried rice with beef, egg, and scallion.", pt: "7.95", qt: "10.15" },
+      { num: "29", n: "Chicken Fried Rice", d: "Stir-fried rice with chicken, egg, and scallion.", pt: "7.35", qt: "8.95" },
+      { num: "30", n: "Roast Pork Fried Rice", d: "Stir-fried rice with roast pork, egg, and scallion.", pt: "7.35", qt: "8.95" },
+      { num: "31", n: "Shrimp Fried Rice", d: "Stir-fried rice with shrimp, egg, and scallion.", pt: "7.95", qt: "10.15" },
+      { num: "32", n: "House Special Fried Rice", d: "Stir-fried rice with shrimp, chicken, and roast pork.", pt: "8.35", qt: "10.65" },
+      { num: "33", n: "Vegetable Fried Rice", d: "Stir-fried rice with mixed garden vegetables and egg.", pt: "6.90", qt: "8.35" },
+      { num: "34", n: "Plain Fried Rice", d: "Stir-fried rice with egg and scallion.", pt: "5.85", qt: "6.75" }
     ]},
     "Lo Mein": { items: [
       { num: "35", n: "Beef Lo Mein", d: "Soft egg noodles tossed with beef and vegetables.", pt: "8.85", qt: "10.95" },
@@ -595,12 +614,12 @@
       { num: "44", n: "Chicken W. Chinese Vegetable", d: "Sliced chicken with bok choy and Chinese greens.", pt: "8.95", qt: "11.05" },
       { num: "45", n: "Chicken W. Mixed Vegetable", d: "Sliced chicken stir-fried with seasonal vegetables.", pt: "8.95", qt: "11.05" },
       { num: "46", n: "Chicken W. Cashew Nuts", d: "Diced chicken stir-fried with roasted cashews and vegetables.", pt: "8.95", qt: "11.05" },
-      { num: "47", n: "Sa Cha Chicken", d: "Wok-seared chicken in a savory Sa Cha (BBQ) sauce.", p: "11.05", spicy: true },
+      { num: "47", n: "Sa Cha Chicken", d: "Seared chicken in a savory Sa Cha (BBQ) sauce.", p: "11.05", spicy: true },
       { num: "48", n: "Kung Pao Chicken", d: "Diced chicken, peanuts, and dried chili in a spicy-tangy sauce.", p: "11.05", spicy: true },
       { num: "49", n: "Szechuan Chicken", d: "Sliced chicken stir-fried in a spicy Szechuan chili sauce.", p: "11.05", spicy: true },
       { num: "50", n: "Mongolian Chicken", d: "Sliced chicken and scallion in a sweet soy-garlic glaze.", p: "11.05" },
       { num: "51", n: "Hunan Chicken W. Black Bean Sauce", d: "Sliced chicken stir-fried in a savory fermented black bean sauce.", p: "11.05", spicy: true },
-      { num: "52", n: "Chicken W. Garlic Sauce", d: "Sliced chicken wok-seared in a bold garlic sauce.", p: "11.05", spicy: true }
+      { num: "52", n: "Chicken W. Garlic Sauce", d: "Sliced chicken seared in a bold garlic sauce.", p: "11.05", spicy: true }
     ]},
     "Pork": { items: [
       { num: "53", n: "Pork W. Green Pepper", d: "Sliced pork with green pepper and onion in brown sauce.", pt: "8.95", qt: "11.05" },
@@ -610,22 +629,22 @@
       { num: "57", n: "Roast Pork W. Snow Peas", d: "Roast pork with crisp snow peas in a light sauce.", pt: "8.95", qt: "11.05" },
       { num: "58", n: "Mongolian Pork", d: "Sliced pork and scallion in a sweet soy-garlic glaze.", p: "11.05" },
       { num: "59", n: "Hunan Sliced Pork W. Black Bean Sauce", d: "Sliced pork stir-fried in a savory fermented black bean sauce.", p: "11.05", spicy: true },
-      { num: "60", n: "Sa Cha Pork", d: "Wok-seared pork in a savory Sa Cha (BBQ) sauce.", p: "11.05", spicy: true },
+      { num: "60", n: "Sa Cha Pork", d: "Seared pork in a savory Sa Cha (BBQ) sauce.", p: "11.05", spicy: true },
       { num: "61", n: "Pork W. Garlic Sauce", d: "Sliced pork stir-fried in a bold garlic sauce.", p: "11.05", spicy: true }
     ]},
     "Beef": { items: [
       { num: "62", n: "Beef W. Chinese Vegetable", d: "Sliced beef with bok choy and Chinese greens.", pt: "9.85", qt: "12.15" },
       { num: "63", n: "Beef W. Fresh Broccoli", d: "Sliced beef and fresh broccoli in brown sauce.", pt: "9.85", qt: "12.15" },
       { num: "64", n: "Beef W. Mushroom", d: "Sliced beef stir-fried with fresh mushroom.", pt: "9.85", qt: "12.15" },
-      { num: "65", n: "Beef W. Oyster Sauce", d: "Sliced beef wok-tossed in a rich oyster sauce.", pt: "9.85", qt: "12.15" },
+      { num: "65", n: "Beef W. Oyster Sauce", d: "Sliced beef stir-tossed in a rich oyster sauce.", pt: "9.85", qt: "12.15" },
       { num: "66", n: "Beef W. Snow Pea Pods", d: "Sliced beef with crisp snow peas in a light sauce.", pt: "9.85", qt: "12.15" },
       { num: "67", n: "Green Pepper Steak", d: "Sliced beef with green pepper and onion in brown sauce.", pt: "9.85", qt: "12.15" },
       { num: "68", n: "Beef W. Vegetable", d: "Sliced beef stir-fried with seasonal vegetables.", pt: "9.85", qt: "12.15" },
       { num: "69", n: "Hunan Beef W. Black Bean Sauce", d: "Sliced beef stir-fried in a savory fermented black bean sauce.", p: "12.15", spicy: true },
       { num: "70", n: "Mongolian Beef", d: "Seared beef and scallion in a sweet soy-garlic glaze.", p: "12.15" },
       { num: "71", n: "Szechuan Beef", d: "Sliced beef stir-fried in a spicy Szechuan chili sauce.", p: "12.15", spicy: true },
-      { num: "72", n: "Beef W. Garlic Sauce", d: "Sliced beef wok-seared in a bold garlic sauce.", p: "12.15", spicy: true },
-      { num: "73", n: "Sa Cha Beef", d: "Wok-seared beef in a savory Sa Cha (BBQ) sauce.", p: "12.15", spicy: true }
+      { num: "72", n: "Beef W. Garlic Sauce", d: "Sliced beef seared in a bold garlic sauce.", p: "12.15", spicy: true },
+      { num: "73", n: "Sa Cha Beef", d: "Seared beef in a savory Sa Cha (BBQ) sauce.", p: "12.15", spicy: true }
     ]},
     "Seafood": { items: [
       { num: "74", n: "Shrimp W. Chinese Vegetable", d: "Shrimp with bok choy and Chinese greens.", pt: "9.85", qt: "12.15" },
@@ -638,14 +657,14 @@
       { num: "81", n: "Szechuan Shrimp", d: "Shrimp stir-fried in a spicy Szechuan chili sauce.", p: "12.15", spicy: true },
       { num: "82", n: "Kung Pao Shrimp", d: "Shrimp, peanuts, and dried chili in a spicy-tangy sauce.", p: "12.15", spicy: true },
       { num: "83", n: "Hunan Shrimp W. Black Bean Sauce", d: "Shrimp stir-fried in a savory fermented black bean sauce.", p: "12.15", spicy: true },
-      { num: "84", n: "Sa Cha Shrimp", d: "Wok-seared shrimp in a savory Sa Cha (BBQ) sauce.", p: "12.15", spicy: true },
-      { num: "85", n: "Shrimp W. Garlic Sauce", d: "Shrimp wok-seared in a bold garlic sauce.", p: "12.15", spicy: true }
+      { num: "84", n: "Sa Cha Shrimp", d: "Seared shrimp in a savory Sa Cha (BBQ) sauce.", p: "12.15", spicy: true },
+      { num: "85", n: "Shrimp W. Garlic Sauce", d: "Shrimp seared in a bold garlic sauce.", p: "12.15", spicy: true }
     ]},
     "Vegetarian": { items: [
       { num: "86", n: "Fresh Broccoli W. Garlic Sauce", d: "Steamed broccoli tossed in a savory garlic sauce.", p: "11.05", spicy: true },
       { num: "87", n: "Broccoli W. Oyster Sauce", d: "Steamed broccoli in a rich oyster-flavored sauce.", p: "11.05" },
-      { num: "88", n: "Sauteed Fresh Broccoli", d: "Broccoli wok-tossed with garlic in a light sauce.", p: "11.05" },
-      { num: "89", n: "Sauteed Mixed Vegetable", d: "Seasonal vegetables wok-tossed in a light garlic sauce.", p: "11.05" }
+      { num: "88", n: "Sauteed Fresh Broccoli", d: "Broccoli stir-tossed with garlic in a light sauce.", p: "11.05" },
+      { num: "89", n: "Sauteed Mixed Vegetable", d: "Seasonal vegetables stir-tossed in a light garlic sauce.", p: "11.05" }
     ]},
     "Sweet & Sour": { items: [
       { num: "90", n: "Sweet & Sour Chicken", d: "Battered fried chicken with pineapple and bell pepper in sweet-and-sour sauce.", p: "11.05" },
@@ -671,10 +690,10 @@
         { num: "C8", n: "Moo Goo Gai Pan", d: "Sliced chicken with mushroom and mixed vegetable in white sauce." },
         { num: "C9", n: "Pepper Steak W. Onion", d: "Sliced beef with green pepper and onion in brown sauce." },
         { num: "C10", n: "Roast Pork Lo Mein", d: "Soft egg noodles tossed with roast pork and vegetables." },
-        { num: "C11", n: "Sauteed Mixed Vegetable", d: "Seasonal vegetables wok-tossed in a light garlic sauce." },
+        { num: "C11", n: "Sauteed Mixed Vegetable", d: "Seasonal vegetables stir-tossed in a light garlic sauce." },
         { num: "C12", n: "Roast Pork W. Chinese Vegetable", d: "Roast pork with bok choy and Chinese greens." },
         { num: "C13", n: "Shrimp Chow Mein", d: "Crispy pan-fried noodles topped with shrimp and vegetables." },
-        { num: "C14", n: "Shrimp W. Garlic Sauce", d: "Shrimp wok-seared in a bold garlic sauce.", spicy: true },
+        { num: "C14", n: "Shrimp W. Garlic Sauce", d: "Shrimp seared in a bold garlic sauce.", spicy: true },
         { num: "C15", n: "Shrimp W. Lobster Sauce", d: "Shrimp simmered in a light garlic-egg white sauce." },
         { num: "C16", n: "Sweet & Sour Pork Or Chicken", d: "Battered and fried, tossed with pineapple and bell pepper." },
         { num: "C17", n: "Chicken W. Cashew Nuts", d: "Diced chicken stir-fried with roasted cashews and vegetables." },
@@ -683,18 +702,18 @@
         { num: "C20", n: "Sweet & Sour Shrimp", d: "Battered fried shrimp with pineapple and bell pepper." },
         { num: "C21", n: "Szechuan Chicken", d: "Sliced chicken stir-fried in a spicy Szechuan chili sauce.", spicy: true },
         { num: "C22", n: "Szechuan Beef Or Shrimp", d: "Stir-fried in a spicy Szechuan chili sauce.", spicy: true },
-        { num: "C23", n: "Sa Cha Chicken, Beef, Or Shrimp", d: "Wok-seared in a savory Sa Cha (BBQ) sauce.", spicy: true }
+        { num: "C23", n: "Sa Cha Chicken, Beef, Or Shrimp", d: "Seared in a savory Sa Cha (BBQ) sauce.", spicy: true }
       ]
     },
     "Chef's Specialties": { items: [
       { num: "S1", n: "Happy Family", d: "Jumbo shrimp, chicken, beef, and pork with assorted Chinese vegetable in brown sauce.", p: "14.15" },
       { num: "S2", n: "Seafood Combination", d: "Jumbo shrimp, scallop, and assorted Chinese vegetable in brown sauce.", p: "15.05" },
       { num: "S3", n: "Szechuan Triple Crown", d: "Sauteed shrimp, chicken, and beef in a spicy Szechuan sauce.", p: "13.65", spicy: true },
-      { num: "S4", n: "Triple Crown", d: "Chicken, beef, and shrimp wok-tossed together in a savory brown sauce.", p: "13.65" },
+      { num: "S4", n: "Triple Crown", d: "Chicken, beef, and shrimp stir-tossed together in a savory brown sauce.", p: "13.65" },
       { num: "S5", n: "Five Stars", d: "Fried chicken, shrimp, beef, and roast pork with mixed vegetable in brown sauce.", p: "13.65" },
       { num: "S6", n: "General Tso's Chicken In Garlic Sauce", d: "Crispy chicken sauteed in a spicy garlic house sauce.", p: "12.15", spicy: true },
       { num: "S7", n: "Triple Crown In Garlic Sauce", d: "Chicken, beef, and shrimp sauteed in a bold garlic sauce.", p: "13.65", spicy: true },
-      { num: "S8", n: "Shrimp & Chicken Delight", d: "Shrimp and chicken wok-tossed together in a savory sauce.", p: "14.05" },
+      { num: "S8", n: "Shrimp & Chicken Delight", d: "Shrimp and chicken stir-tossed together in a savory sauce.", p: "14.05" },
       { num: "S9", n: "Sesame Chicken", d: "Crispy chicken glazed in sweet sesame sauce.", p: "12.15" },
       { num: "S10", n: "Chicken W. Orange Peel", d: "Crispy chicken sauteed in a citrus-forward orange peel sauce.", p: "12.15" },
       { num: "S11", n: "Pineapple Chicken", d: "Crispy chicken with orange peel and fresh pineapple in a sweet house sauce.", p: "12.50" }
