@@ -101,8 +101,7 @@
 
   header.site{
     position: sticky; top:0; z-index: 50;
-    background: rgba(244,236,217,0.92);
-    backdrop-filter: blur(6px);
+    background: var(--rice);
     border-bottom: 1px solid var(--line);
   }
   nav{
@@ -126,6 +125,7 @@
     padding: 10px 20px; border-radius: 2px;
     font-weight:600; font-size:0.88rem; text-decoration:none;
     letter-spacing:0.02em; transition: background .2s ease; white-space:nowrap;
+    position: relative; z-index: 60;
   }
   .nav-cta:hover{ background: var(--lacquer-dark); }
   .menutoggle{ display:none; }
@@ -283,8 +283,11 @@
       font-size: 1.1rem; z-index:40; overflow-y:auto;
     }
     .navlinks.open{ transform: translateY(0); }
-    .menutoggle{ display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; background:none; border:none; cursor:pointer; padding:10px; flex-shrink:0; width:44px; height:44px; }
-    .menutoggle span{ width:22px; height:2px; background: var(--ink); display:block; }
+    .menutoggle{ display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; background:none; border:none; cursor:pointer; padding:10px; flex-shrink:0; width:44px; height:44px; position:relative; z-index:60; }
+    .menutoggle span{ width:22px; height:2px; background: var(--ink); display:block; transition: transform .25s ease, opacity .2s ease; }
+    .menutoggle[aria-expanded="true"] span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+    .menutoggle[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+    .menutoggle[aria-expanded="true"] span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
     .hero .wrap, .about .wrap, .visit .wrap{ grid-template-columns: 1fr; }
     .strip .wrap{ grid-template-columns: 1fr; gap: 30px; }
     .menu-grid{ grid-template-columns: 1fr; }
